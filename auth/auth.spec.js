@@ -1,8 +1,9 @@
 const request = require('supertest');
 const server = require('../api/server');
 
-const db = require('../database/dbConfig');
-const Users = require('../users/model');
+// const db = require('../database/dbConfig');
+// const Users = require('../users/model');
+
 
 describe('register route', () => {
     it('should run the tests', () => {
@@ -33,7 +34,8 @@ describe('register route', () => {
         it('should add the created user', function(done) {
             request(server)
             .post('/api/auth/register')
-            .send({username: "d", password: "pass"})
+            .send({username: "c", password: "pass"})
+            // .setHeader('Authorization', token)
             .expect(201)
             .end(function(err, res) {
                 if (err) return done(err);
@@ -43,7 +45,8 @@ describe('register route', () => {
     })
 });
 
-describe('register route', () => {
+
+describe('login route', () => {
     it('should run the tests', () => {
         expect(true).toBe(true);
     })
@@ -55,15 +58,22 @@ describe('register route', () => {
     })
 
     describe('POST /api/auth/login', () => { 
-        it('should login the user', function(done) {
-            request(server)
-            .post('/api/auth/login')
-            .send({username: "d", password: "pass"})
-            .expect(200)
-            .end(function(err, res) {
-                if (err) return done(err);
-                done();
-            });
-        })
+
+        function loginUser(auth) {
+            
+            it('should login the user', function(done) {
+                request(server)
+                .post('/api/auth/login')
+                // .set('Authorization', 'bearer ' + auth.token)
+                .send({username: "d", password: "pass"})
+                .expect(200)
+                .end(onResponse);
+                    
+                    function onResponse(err, res) {
+                        auth.token = res.body.token;
+                        return done();
+                    }
+                })
+        };
     })
 });
