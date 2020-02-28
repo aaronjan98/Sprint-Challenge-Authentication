@@ -39,4 +39,21 @@ router.post('/login', (req, res) => {
     });
 });
 
+function generateToken(user) {
+  const payload = {
+    subject: user.id,
+    username: user.username,
+    department: user.department || 'customer'
+  };
+
+  const secret = jwtSecret;
+
+  const options = {
+    expiresIn: '1h',
+
+  };
+
+  return jwt.sign(payload, secret, options);
+}
+
 module.exports = router;
