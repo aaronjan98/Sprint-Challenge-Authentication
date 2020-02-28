@@ -31,14 +31,39 @@ describe('register route', () => {
     
     describe('POST /api/auth/register', () => { 
         it('should add the created user', function(done) {
-                    request(server)
-                    .post('/api/auth/register')
-                    .send({username: "d", password: "pass"})
-                    .expect(201)
-                    .end(function(err, res) {
-                        if (err) return done(err);
-                        done();
-                    });
+            request(server)
+            .post('/api/auth/register')
+            .send({username: "d", password: "pass"})
+            .expect(201)
+            .end(function(err, res) {
+                if (err) return done(err);
+                done();
+            });
+        })
+    })
+});
+
+describe('register route', () => {
+    it('should run the tests', () => {
+        expect(true).toBe(true);
+    })
+    
+    describe('test environment', function () {
+        it('should use the testing environment', function () {
+            expect(process.env.NODE_ENV).toBe('testing');
+        })
+    })
+
+    describe('POST /api/auth/login', () => { 
+        it('should login the user', function(done) {
+            request(server)
+            .post('/api/auth/login')
+            .send({username: "d", password: "pass"})
+            .expect(200)
+            .end(function(err, res) {
+                if (err) return done(err);
+                done();
+            });
         })
     })
 });
