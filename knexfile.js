@@ -9,4 +9,16 @@ module.exports = {
     },
     seeds: { directory: './database/seeds' },
   },
+  testing: {
+    client: 'sqlite3',
+    connection: { filename: './database/auth.db3' },
+    pool: {
+      min: 2,
+      max: 10
+    },
+    migrations: {
+      directory: './database/migrations',
+      tableName: 'dbmigrations'
+    }
+  }
 };

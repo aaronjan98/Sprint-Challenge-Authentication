@@ -33,7 +33,7 @@ router.post('/login', (req, res) => {
           token
         });
       } else {
-        res.status(401).json({ message: 'Invalid Credentials' });
+        res.status(401).json({ you: 'shall not pass!' });
       }
     })
     .catch(error => {
@@ -44,15 +44,13 @@ router.post('/login', (req, res) => {
 function generateToken(user) {
   const payload = {
     subject: user.id,
-    username: user.username,
-    department: user.department || 'customer'
+    username: user.username
   };
 
   const secret = jwtSecret;
 
   const options = {
-    expiresIn: '1h',
-
+    expiresIn: '1h'
   };
 
   return jwt.sign(payload, secret, options);
